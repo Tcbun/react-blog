@@ -1,0 +1,17 @@
+.registerFrom {
+    width:1200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background: #f6f6f6;
+    padding: 50px 15px;
+    .ant-form-item-control {
+        width: 430px;
+        .ant-form-item-children {
+            display: flex;
+            color: #f5222d;
+            .warningAgree {
+                margin-right: 8px;
+            }
+        }
+    }
+}

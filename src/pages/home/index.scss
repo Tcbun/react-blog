@@ -1,0 +1,25 @@
+.wrap {
+    width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 15px;
+    padding-right: 15px;
+    .user {
+        width: 285px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f6f6f6;
+        box-shadow: 0 1px 3px rgba(26,26,26,.1);
+        margin-right: 20px;
+    }
+    .articles {
+        width: 865px;
+        height: 300px;
+        background: #f6f6f6;
+        box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    }
+}

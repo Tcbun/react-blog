@@ -1,0 +1,1 @@
+const qsl_select = "SELECT * FROM";
