@@ -13,7 +13,7 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        Axios.post('http://localhost:8889/register', {
+        Axios.post('http://localhost:8889/login', {
           userName: values.username,
           password: values.password
         })

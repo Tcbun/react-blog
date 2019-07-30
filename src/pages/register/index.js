@@ -10,6 +10,10 @@ import {
 } from 'antd';
 
 import './index.scss';
+import Axios from 'axios';
+import { connect } from 'react-redux';
+import { message } from 'antd';
+// import { withRouter } from "react-router";
 
 class RegistrationForm extends React.Component {
   state = {
@@ -19,19 +23,40 @@ class RegistrationForm extends React.Component {
   };
 
   handleSubmit = (e, props) => {
-    const { form } = this.props;
+    const { form, history, afterRegister } = this.props;
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err && form.getFieldValue('agreement')) {
+      if (!err && form.getFieldValue('agreement') && (values.password && values.password === values.confirm) && (values.confirm && values.confirm === values.password)) {
         console.log('Received values of form: ', values);
         this.setState({
           ifAgree: false
+        });
+        Axios.post('http://localhost:8889/register', {
+          userName: values.userName,
+          password: values.password
         })
+          .then(function (res) {
+            const data = res.data;
+            switch (data.code) {
+              case 3:
+                message.error('用户已存在！');
+                break;
+              case 4:
+                message.success('注册成功！');
+                // 注册完成跳回首页并且以注册的账号密码登录
+                afterRegister(data);
+                // 注册完成跳回首页
+                history.push("/");
+                break;
+              default:
+            };
+          })
       } else {
+        e.preventDefault();
         this.setState({
           ifAgree: true
-        })
-      }
+        });
+      };
     });
   };
 
@@ -171,7 +196,7 @@ class RegistrationForm extends React.Component {
                 我同意在这里注册！
               </Checkbox>
             )}
-            <span className={this.state.ifAgree ? 'eleShow' : 'eleHidden'}><Icon type="warning" className="warningAgree"/>您必须同意才可以注册</span>
+            <span className={this.state.ifAgree ? 'eleShow' : 'eleHidden'}><Icon type="warning" className="warningAgree" />您必须同意才可以注册</span>
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">
@@ -186,4 +211,23 @@ class RegistrationForm extends React.Component {
 
 const WrappedRegistrationForm = Form.create({ name: 'register' })(RegistrationForm);
 
-export default WrappedRegistrationForm;
+const mapStateToProps = (e) => {
+  return {
+
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    afterRegister(data) {
+      const action = {
+        type: 'register_after_login',
+        payload: {
+          isLogged: true,
+          userName: data.userName
+        }
+      };
+      dispatch(action);
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedRegistrationForm);

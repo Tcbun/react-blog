@@ -1,25 +1,85 @@
 .articlesList li {
-    padding: 18px;
-}
-.articleTools {
+  padding: 18px;
+  .articleTools {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     .evaluation {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        div {
-            width: 108px;
-            text-align: center;
-            line-height: 30px;
-            padding: 0 12px;
-            margin-right: 18px;
-            cursor: pointer;
-        }
-        .agree,.disagree {
-            background: rgba(0,132,255,.1);
-            color: #0084ff;
-        }
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      div {
+        // width: 108px;
+        text-align: center;
+        line-height: 30px;
+        padding: 0 12px;
+        margin-right: 18px;
+        cursor: pointer;
+      }
+      .agree,
+      .disagree {
+        background: rgba(0, 132, 255, 0.1);
+        color: #0084ff;
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .comments {
+        width: 120px;
+      }
+      .author {
+        // width: 180px;
+      }
     }
+  }
+  .article_comment {
+    display: none;
+    width: 720px;
+    margin: 0 auto;
+    border: 1px solid #bfbfbf;
+    background: #f6f6f6;
+    border-radius: 6px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    padding: 10px;
+    transition: all 5s;
+    -moz-transition: all 5s; /* Firefox 4 */
+    -webkit-transition: all 5s; /* Safari 和 Chrome */
+    -o-transition: all 5s; /* Opera */
+    box-shadow: rgba(26, 26, 26, 0.4) 0 0 10px ;
+    margin-top: 20px;
+    .comment_count {
+      padding-bottom: 10px;
+      padding-left: 16px;
+      color: #000;
+      font-weight: bold;
+    }
+    .comment_list li {
+      position: relative;
+      border-bottom: 1px dashed #bfbfbf;
+      // &:last-child {
+      //   border-bottom: none;
+      // }
+      .comment_time {
+        position: absolute;
+        right: 20px;
+        top:18px;
+      }
+      div {
+        color: #333333;
+        margin-bottom: 4px;
+      }
+    }
+    .comment_submit {
+      display: flex;
+      justify-content: space-between;
+      padding: 18px;
+      margin-top: 6px;
+      .comment_text {
+        width: 80%;
+        resize: none;
+      }
+    }
+  }
 }

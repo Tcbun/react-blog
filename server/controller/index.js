@@ -2,7 +2,7 @@ const { connection } = require('../db');
 
 const select = (selectSql, req, res) => {
     try {
-        connection.query(`SELECT * FROM ${selectSql}`, function (err, results, fields) {
+        connection.query(`SELECT id,title,content,star,saliva,comment,date,author FROM article_table`, function (err, results, fields) {
             console.log(results);
             res.json(results);
         })
